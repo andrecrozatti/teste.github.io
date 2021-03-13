@@ -61,7 +61,8 @@
                 x = x.substr(0, ptr);
             }
             var hash = window.location.hash.substr(1);
-
+            
+            window.location = x;
             alert(urlParams + " " + x + " acabou " + hash + href)
         }
 
