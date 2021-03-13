@@ -47,23 +47,34 @@
                 // Passamos a querystring atual através de location.search
                 // Como exemplo, temos: https://website.com/blog?page=1
                 
-                document.querySelector('#resultado').innerText = data.codeResult.code + " " + x + " " + hash;
-            });
+                //document.querySelector('#resultado').innerText = data.codeResult.code + " " + x + " " + hash;
+                const urlParams = new URLSearchParams(location.search);
+                var x = urlParams.get('ret'); // 1
+                //var href = window.location.href;
+                var ptr = x.lastIndexOf("#");
+                if (ptr > 0) {
+                    x = x.substr(0, ptr);
+                }
+                //var hash = window.location.hash.substr(1);
+
+                window.location = x+"#"+data.codeResult.code;
+                //alert(urlParams + " " + x + " acabou " + hash + href)
+                });
 
         }
 
         function pegaUrl(){
             const urlParams = new URLSearchParams(location.search);
             var x = urlParams.get('ret'); // 1
-            var href = window.location.href;
+            //var href = window.location.href;
             var ptr = x.lastIndexOf("#");
             if (ptr > 0) {
                 x = x.substr(0, ptr);
             }
-            var hash = window.location.hash.substr(1);
+            //var hash = window.location.hash.substr(1);
             
-            window.location = x+"/#651651";
-            alert(urlParams + " " + x + " acabou " + hash + href)
+            window.location = x+"#651651";
+            //alert(urlParams + " " + x + " acabou " + hash + href)
         }
 
     </script>
