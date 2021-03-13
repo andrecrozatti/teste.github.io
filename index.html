@@ -45,7 +45,9 @@
             // Como exemplo, temos: https://website.com/blog?page=1
             const urlParams = new URLSearchParams(location.search);
 
-            document.querySelector('#resultado').innerText = data.codeResult.code + " " + urlParams.get('ret') // 1
+           var hash = window.location.hash.substr(1);
+
+           document.querySelector('#resultado').innerText = data.codeResult.code + " " + x + " " + hash ;
 
         });
 
