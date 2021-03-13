@@ -25,9 +25,9 @@
             },
             decoder: {
                 readers: [
-            'ean_reader'
-          ],
-          multiple: false
+                    'ean_reader'
+                ],
+                multiple: false
             }
         }, function (err) {
             if (err) {
@@ -41,6 +41,12 @@
         Quagga.onDetected(function (data) {
             console.log(data.codeResult.code);
             document.querySelector('#resultado').innerText = data.codeResult.code;
+            // Passamos a querystring atual através de location.search
+            // Como exemplo, temos: https://website.com/blog?page=1
+            const urlParams = new URLSearchParams(location.search);
+
+            console.log(urlParams.get('ret')); // 1
+
         });
 
     </script>
