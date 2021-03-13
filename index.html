@@ -12,44 +12,56 @@
 
     <div id="resultado"></div>
     <div id="camera"></div>
+    <button type="button" onclick="startacamera()">starta camerca</button>
+    <button type="button" onclick="pegaUrl()">Pega Url</button>
+
 
     <script src="quagga.min.js"></script>
 
     <script>
 
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: document.querySelector('#camera')    // Or '#yourElement' (optional)
-            },
-            decoder: {
-                readers: [
-                    'ean_reader'
-                ],
-                multiple: false
-            }
-        }, function (err) {
-            if (err) {
-                console.log(err);
-                return
-            }
-            console.log("Initialization finished. Ready to start");
-            Quagga.start();
-        });
+        function startacamera() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+                },
+                decoder: {
+                    readers: [
+                        'ean_reader'
+                    ],
+                    multiple: false
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+            });
+            var hash;
+            Quagga.onDetected(function (data) {
+                document.querySelector('#resultado').innerText = data.codeResult.code;
+                // Passamos a querystring atual através de location.search
+                // Como exemplo, temos: https://website.com/blog?page=1
+                
+                document.querySelector('#resultado').innerText = data.codeResult.code + " " + x + " " + hash;
+            });
 
-        Quagga.onDetected(function (data) {
-            console.log(data.codeResult.code);
-            
-            // Passamos a querystring atual através de location.search
-            // Como exemplo, temos: https://website.com/blog?page=1
+        }
+
+        function pegaUrl(){
             const urlParams = new URLSearchParams(location.search);
+            var x = urlParams.get('ret'); // 1
+            var hash = window.location.hash.substr(1);
 
-           var hash = window.location.hash.substr(1);
+            alert(urlParams + " " + x + " " + hash )
+            
 
-           document.querySelector('#resultado').innerText = data.codeResult.code + " " + hash + " " + urlParams;
 
-        });
+        }
 
     </script>
 
