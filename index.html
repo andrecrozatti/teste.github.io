@@ -55,12 +55,14 @@
         function pegaUrl(){
             const urlParams = new URLSearchParams(location.search);
             var x = urlParams.get('ret'); // 1
-            var hash = window.location.hash.substr(1).innerText = "teste";
+            var href = window.location.href;
+            var ptr = href.lastIndexOf("#");
+            if (ptr > 0) {
+                href = href.substr(0, ptr);
+            }
+            var hash = window.location.hash.substr(1);
 
-            alert(urlParams + " " + x + "aqui " + hash )
-            
-
-
+            alert(urlParams + " " + x + " acabou " + hash + href)
         }
 
     </script>
